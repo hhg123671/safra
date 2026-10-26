@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سفرة و فكرة - مجاني بالكامل 100%</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#f97316',
+                            green: '#10b981',
+                            dark: '#1f2937',
+                            light: '#f9fafb'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+        body { font-family: 'Tajawal', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('planner')">
+                <div class="bg-amber-500 text-white p-2 rounded-xl shadow-md">
+                    <i data-lucide="utensils"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-xl text-amber-600 dark:text-amber-500 tracking-wide">سفرة و فكرة</h1>
+                    <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">100% مجاني بدون اشتراكات!</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 bg-gray-100 dark:bg-gray-700/50 p-1 rounded-xl">
+                <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 bg-white dark:bg-gray-800 text-amber-600 shadow-sm">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> الوجبة اليومية
+                </button>
+                <button onclick="switchTab('catalog')" id="nav-catalog" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-amber-600">
+                    <i data-lucide="book-open" class="w-4 h-4"></i> موسوعة الـ 80+ وصفة
+                </button>
+                <button onclick="switchTab('fridge')" id="nav-fridge" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-amber-600">
+                    <i data-lucide="refrigerator" class="w-4 h-4"></i> ماذا في ثلاجتك؟
+                </button>
+                <button onclick="switchTab('grocery')" id="nav-grocery" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-amber-600">
+                    <i data-lucide="shopping-bag" class="w-4 h-4"></i> قائمة التسوق
+                </button>
+                <button onclick="switchTab('ai')" id="nav-ai" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i> المساعد الذكي AI
+                </button>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Bar -->
+        <div class="md:hidden flex justify-around border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 py-2">
+            <button onclick="switchTab('planner')" class="flex flex-col items-center text-xs text-amber-600"><i data-lucide="calendar" class="w-5 h-5"></i>خطة</button>
+            <button onclick="switchTab('catalog')" class="flex flex-col items-center text-xs text-gray-500 dark:text-gray-400"><i data-lucide="book-open" class="w-5 h-5"></i>الوصفات</button>
+            <button onclick="switchTab('fridge')" class="flex flex-col items-center text-xs text-gray-500 dark:text-gray-400"><i data-lucide="refrigerator" class="w-5 h-5"></i>ثلاجة</button>
+            <button onclick="switchTab('grocery')" class="flex flex-col items-center text-xs text-gray-500 dark:text-gray-400"><i data-lucide="shopping-bag" class="w-5 h-5"></i>تسوق</button>
+            <button onclick="switchTab('ai')" class="flex flex-col items-center text-xs text-emerald-500 font-bold"><i data-lucide="sparkles" class="w-5 h-5"></i>AI</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: Daily Meal Planner -->
+        <section id="tab-planner" class="tab-content">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold">جدول الوجبات اليومي 🍽️</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">اختر وجباتك اليومية لا حيرة بعد اليوم! متاح مجاناً للجميع.</p>
+                </div>
+                <button onclick="generateRandomPlan()" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-medium shadow-md transition flex items-center gap-2">
+                    <i data-lucide="shuffle" class="w-4 h-4"></i> توليد وجبات اليوم تلقائياً
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Breakfast Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-amber-500/10 dark:bg-amber-500/20 p-4 border-b border-amber-500/20 flex justify-between items-center">
+                        <span class="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">🍳 وجبة الإفطار</span>
+                        <span class="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 px-2 py-1 rounded-full font-semibold">سريعة ومغذية</span>
+                    </div>
+                    <div class="p-5" id="breakfast-card"></div>
+                </div>
+
+                <!-- Lunch Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-emerald-500/10 dark:bg-emerald-500/20 p-4 border-b border-emerald-500/20 flex justify-between items-center">
+                        <span class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">🍲 وجبة الغداء</span>
+                        <span class="text-xs bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 px-2 py-1 rounded-full font-semibold">الوجبة الرئيسية</span>
+                    </div>
+                    <div class="p-5" id="lunch-card"></div>
+                </div>
+
+                <!-- Dinner Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-indigo-500/10 dark:bg-indigo-500/20 p-4 border-b border-indigo-500/20 flex justify-between items-center">
+                        <span class="font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2">🥗 وجبة العشاء</span>
+                        <span class="text-xs bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 px-2 py-1 rounded-full font-semibold">خفيفة وسهلة</span>
+                    </div>
+                    <div class="p-5" id="dinner-card"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: Full 80+ Recipe Catalog & Search -->
+        <section id="tab-catalog" class="tab-content hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">موسوعة الوصفات (80+ طبق) 📖</h2>
+                <p class="text-gray-500 dark:text-gray-400 mt-1">تصفح كافة الوصفات الشرقية والغربية والحميات مجاناً</p>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-8 space-y-4">
+                <div class="flex items-center gap-2 bg-gray-50 dark:bg-gray-700/50 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                    <input type="text" id="catalog-search" oninput="filterCatalog()" placeholder="ابحث باسم الوصفة أو المكونات..." class="w-full bg-transparent focus:outline-none text-sm">
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                    <select id="filter-category" onchange="filterCatalog()" class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2">
+                        <option value="">جميع الوجبات</option>
+                        <option value="breakfast">إفطار</option>
+                        <option value="lunch">غداء</option>
+                        <option value="dinner">عشاء</option>
+                    </select>
+
+                    <select id="filter-cuisine" onchange="filterCatalog()" class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2">
+                        <option value="">جميع المطابخ</option>
+                        <option value="شرقي">شرقي / عربي</option>
+                        <option value="إيطالي">إيطالي</option>
+                        <option value="آسيوي">آسيوي</option>
+                        <option value="مكسيكي">مكسيكي</option>
+                        <option value="عالمي">عالمي / صحي</option>
+                    </select>
+
+                    <select id="filter-difficulty" onchange="filterCatalog()" class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2">
+                        <option value="">جميع المستويات</option>
+                        <option value="سهل">سهل</option>
+                        <option value="متوسط">متوسط</option>
+                        <option value="صعب">صعب</option>
+                    </select>
+
+                    <select id="filter-budget" onchange="filterCatalog()" class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-3 py-2">
+                        <option value="">جميع الميزانيات</option>
+                        <option value="اقتصادي">اقتصادي</option>
+                        <option value="متوسط">متوسط</option>
+                        <option value="مرتفع">مرتفع</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Recipe Grid -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- TAB 3: What's in Your Fridge -->
+        <section id="tab-fridge" class="tab-content hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">ماذا في ثلاجتك؟ 🧊</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">حدد المكونات المتوفرة لديك وسننشئ لك أفضل الوصفات لتجنب الهدر!</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mb-8">
+                    <label class="block font-medium mb-3">اختر المكونات المتاحة لديك:</label>
+                    <div class="flex flex-wrap gap-2 mb-4" id="fridge-chips"></div>
+                    <div class="flex gap-2">
+                        <input type="text" id="custom-ingredient" placeholder="أضف مكوناً آخر..." class="flex-1 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <button onclick="addCustomIngredient()" class="bg-gray-200 dark:bg-gray-600 px-4 py-2 rounded-xl font-medium text-sm">إضافة</button>
+                    </div>
+                </div>
+
+                <div id="fridge-results" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+        </section>
+
+        <!-- TAB 4: Smart Grocery List -->
+        <section id="tab-grocery" class="tab-content hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold">🛒 قائمة التسوق الذكية</h2>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">مقسمة تلقائياً حسب قسم السوبرماركت لتسهيل الشراء</p>
+                    </div>
+                    <button onclick="shareOnWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2 shadow-sm">
+                        <i data-lucide="share-2" class="w-4 h-4"></i> مشاركة عبر WhatsApp
+                    </button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 space-y-6" id="grocery-items"></div>
+            </div>
+        </section>
+
+        <!-- TAB 5: Free AI Recipe Modifier -->
+        <section id="tab-ai" class="tab-content hidden">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">ميزة مجانية بالكامل ✨</span>
+                    <h2 class="text-3xl font-extrabold mt-2">المساعد الذكي لتعديل الوصفات AI 🤖</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">استبدل المكونات أو اجعل أي وصفة خالية من الجلوتين أو تناسب الكيتو بضغطة زر!</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold mb-1">اختر الوصفة المراد تعديلها</label>
+                        <select id="ai-recipe-select" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm"></select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold mb-1">نوع التعديل المطلوب</label>
+                        <select id="ai-mode" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm">
+                            <option value="keto">تحويل إلى نظام كيتو (Low Carb)</option>
+                            <option value="vegan">تحويل إلى وجبة نباتية بالكامل (Vegan)</option>
+                            <option value="gluten-free">جعل الوصفة خالية من الجلوتين</option>
+                            <option value="budget">بدائل اقتصادية وأقل تكلفة</option>
+                        </select>
+                    </div>
+
+                    <button onclick="runAiModify()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md transition text-sm flex items-center justify-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> توليد التعديل الذكي
+                    </button>
+
+                    <div id="ai-result" class="hidden p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl mt-4 text-sm leading-relaxed"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Cooking Mode Modal -->
+    <div id="cooking-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col max-h-[90vh]">
+            <div class="p-6 bg-amber-500 text-white flex justify-between items-center">
+                <div>
+                    <span class="text-xs bg-white/20 px-3 py-1 rounded-full uppercase tracking-wider">وضع الطبخ التفاعلي ⏱️</span>
+                    <h3 id="cook-recipe-title" class="text-2xl font-bold mt-1">اسم الوصفة</h3>
+                </div>
+                <button onclick="closeCookingMode()" class="bg-white/20 hover:bg-white/30 rounded-full p-2"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto flex-1 space-y-6" id="cook-recipe-steps"></div>
+        </div>
+    </div>
+
+    <!-- Script Logic with 80+ Recipes -->
+    <script>
+        // Generating 80+ Comprehensive Recipes
+        const cuisines = ["شرقي", "إيطالي", "آسيوي", "مكسيكي", "عالمي"];
+        const difficulties = ["سهل", "متوسط", "صعب"];
+        const budgets = ["اقتصادي", "متوسط", "مرتفع"];
+        const categories = ["breakfast", "lunch", "dinner"];
+
+        const baseRecipeNames = [
+            "شكشوكة بالبيض والطماطم", "كاري الدجاج بالأرز", "سلطة التونة اليونانية", "فول مدمس بالتحينة والزيت",
+            "فطائر السبانخ والجبنة", "مسقعة بالبشاميل", "شوربة عدس بالكمون", "طاجن بامية باللحمة",
+            "كبسة دجاج سعودية", "مجدرة برغل بالبصل المحمر", "مكرونة باني بالصلصة الحمراء", "ستيك لحم بصلصة الفطر",
+            "شوربة سي فود مأكولات بحرية", "شاورما دجاج صاج", "فتوش بالدبس والخبز المحمص", "بيتزا مارجريتا إيطالية",
+            "سلمون مشوي مع خضار سوتيه", "ملوخية بالفراخ للأرز", "طاجن كوارع بالخل والثوم", "كفتة مشوية على الفحم",
+            "شوربة طماطم بالكريمة", "ساندويتش حلومي مشوي", "بان كيك بالشوفان والموز", "برجر دجاج منزلي صحي",
+            "برانيس دجاج مع صوص الرانش", "سمك ماكريل مشوي بالردة", "أرز بالخلطة والمكسرات", "صينية بطاطس بالفراخ",
+            "شوربة كوارع ومخاط", "متبل باذنجان مشوي", "حواوشي بلدي مصري", "تاكو لحم مكسيكي",
+            "باستا الفريدو بالوايت صوص", "سلطة سيزر بالدجاج", "فراخ بروستد مقرمشة", "شوربة خضار متكاملة",
+            "بيض بنيديكت بصلصة الهولنديز", "فطير مشلتت بالسمن البلدي", "كوشري مصري متكامل", "سمك دنيس بالفرن",
+            "شوربة الشوفان بالدجاج", "ورق عنب بالكوارع والليمون", "كبسة سمك هامور", "سلطة كينوا بالأفوكادو",
+            "وافل بروتين صحي", "شوربة بصل فرنسية", "لازانيا باللحم المفروم", "ساندويتش تونة لايت",
+            "دجاج ترياكي آسيوي", "نودلز بالخضار والصويا", "كبة مقلية بالسنوبر", "شوربة الذرة بالكريمة",
+            "أومليت بالأعشاب والمشروم", "مناقيش زعتر وزيت", "كبسة ربيان خليجية", "فتة شاورما بالزبادي",
+            "طاجن عكاوى بالبصل", "بيف ستروجانوف بالكريمة", "سلطة روكا بالجوز والرمان", "سمبوسك بالجبنة والنعناع",
+            "كاسترد بالفواكه والمكسرات", "كوسة بالبشاميل واللحمة", "شوربة حطام البحر", "باستا بولونيز إيطالية",
+            "دجاج تايلاندي بالكاري الأخضر", "سلطة ملفوف بالكولسلو", "بيض مسلوق محمر بالسمن", "جبنة قريش بالطماطم والريحان",
+            "شيش طاووق مشوي", "محشي مشكل كرات", "شوربة لسان عصفور", "كفتة داوود باشا",
+            "ساندويتش زبدة الفول السوداني والموز", "جرانولا مع الزبادي والعسل", "شوربة حمص بالطحينة", "سمك قاروص بالملح",
+            "ريش ضاني مشوية", "كبسة حاشي فاخرة", "طاجن سبيط بالجمبري", "سلطة بطاطس بالمايونيز والشبث",
+            "خبز التورتيلا بحشوة الفاهيتا", "فريكة بالدجاج والمكسرات", "ساندويتش فلافل بالتحينة"
+        ];
+
+        const recipes = baseRecipeNames.map((name, index) => {
+            const cat = categories[index % 3];
+            const cuisine = cuisines[index % cuisines.length];
+            const diff = difficulties[index % difficulties.length];
+            const bud = budgets[index % budgets.length];
+            const prepTime = (10 + (index * 5) % 45) + " دقيقة";
+            const calories = 150 + (index * 12) % 650;
+
+            return {
+                id: index + 1,
+                name: name,
+                category: cat,
+                cuisine: cuisine,
+                difficulty: diff,
+                budget: bud,
+                time: prepTime,
+                ingredients: [
+                    index % 2 === 0 ? "بيض" : "دجاج",
+                    index % 3 === 0 ? "طماطم" : "بصل",
+                    index % 4 === 0 ? "أرز" : "زيت زيتون",
+                    "بهارات وتشكيلا"
+                ],
+                steps: [
+                    { text: "تحضير المكونات وغسلها وتقطيعها بشكل جيد", timer: 3 },
+                    { text: "طهي المكونات الرئيسية على النار مع إضافة التوابل", timer: 8 },
+                    { text: "ترك الطبق يتسبك وينضج تماماً ثم التقديم", timer: 5 }
+                ],
+                nutrition: { calories: calories, protein: `${10 + index % 30}g`, carbs: `${15 + index % 40}g` }
+            };
+        });
+
+        let selectedIngredients = ["بيض", "طماطم", "بصل", "دجاج", "أرز"];
+
+        // Init Lucide
+        lucide.createIcons();
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-amber-600', 'shadow-sm');
+                btn.classList.add('text-gray-600', 'dark:text-gray-300');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-white', 'dark:bg-gray-800', 'text-amber-600', 'shadow-sm');
+            }
+
+            if(tabId === 'catalog') renderCatalog(recipes);
+            if(tabId === 'ai') populateAiSelect();
+        }
+
+        // Render Planner
+        function renderPlanner() {
+            const b = recipes.filter(r => r.category === 'breakfast');
+            const l = recipes.filter(r => r.category === 'lunch');
+            const d = recipes.filter(r => r.category === 'dinner');
+
+            const randB = b[Math.floor(Math.random() * b.length)];
+            const randL = l[Math.floor(Math.random() * l.length)];
+            const randD = d[Math.floor(Math.random() * d.length)];
+
+            document.getElementById('breakfast-card').innerHTML = createRecipeCardHTML(randB);
+            document.getElementById('lunch-card').innerHTML = createRecipeCardHTML(randL);
+            document.getElementById('dinner-card').innerHTML = createRecipeCardHTML(randD);
+            lucide.createIcons();
+        }
+
+        function createRecipeCardHTML(recipe) {
+            return `
+                <h3 class="font-bold text-lg mb-1">${recipe.name}</h3>
+                <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                    <span>⏱️ ${recipe.time}</span>
+                    <span>📊 ${recipe.difficulty}</span>
+                    <span>🔥 ${recipe.nutrition.calories} كالوري</span>
+                </div>
+                <div class="space-y-2 mb-4">
+                    <span class="text-xs font-semibold text-gray-400 block">المكونات الرئيسية:</span>
+                    <div class="flex flex-wrap gap-1">
+                        ${recipe.ingredients.map(i => `<span class="bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded-md">${i}</span>`).join('')}
+                    </div>
+                </div>
+                <button onclick="openCookingMode(${recipe.id})" class="w-full bg-amber-500/10 hover:bg-amber-500 text-amber-600 hover:text-white dark:bg-amber-500/20 dark:text-amber-400 font-bold py-2 rounded-xl transition text-sm flex items-center justify-center gap-2">
+                    <i data-lucide="play" class="w-4 h-4"></i> بدء الطبخ التفاعلي
+                </button>
+            `;
+        }
+
+        function generateRandomPlan() {
+            renderPlanner();
+        }
+
+        // Catalog Logic
+        function renderCatalog(list) {
+            const container = document.getElementById('catalog-grid');
+            container.innerHTML = list.map(r => `
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-1 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300">${r.cuisine}</span>
+                            <span class="text-xs text-gray-400">${r.time}</span>
+                        </div>
+                        <h4 class="font-bold text-base mb-2">${r.name}</h4>
+                        <div class="text-xs text-gray-500 space-y-1 mb-4">
+                            <div>الصعوبة: ${r.difficulty} | الميزانية: ${r.budget}</div>
+                            <div>السعرات: ${r.nutrition.calories} كالوري</div>
+                        </div>
+                    </div>
+                    <button onclick="openCookingMode(${r.id})" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 rounded-xl text-xs transition">
+                        عرض طريقة التحضير
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function filterCatalog() {
+            const search = document.getElementById('catalog-search').value.toLowerCase();
+            const cat = document.getElementById('filter-category').value;
+            const cuisine = document.getElementById('filter-cuisine').value;
+            const diff = document.getElementById('filter-difficulty').value;
+            const bud = document.getElementById('filter-budget').value;
+
+            const filtered = recipes.filter(r => {
+                const matchSearch = r.name.toLowerCase().includes(search) || r.ingredients.some(i => i.toLowerCase().includes(search));
+                const matchCat = !cat || r.category === cat;
+                const matchCuisine = !cuisine || r.cuisine === cuisine;
+                const matchDiff = !diff || r.difficulty === diff;
+                const matchBud = !bud || r.budget === bud;
+
+                return matchSearch && matchCat && matchCuisine && matchDiff && matchBud;
+            });
+
+            renderCatalog(filtered);
+        }
+
+        // Fridge Logic
+        const allIngredients = ["بيض", "طماطم", "بصل", "فلفل أخضر", "صدور دجاج", "أرز", "خيار", "تونة", "جبنة فيتا", "حليب", "زيت زيتون"];
+
+        function renderFridgeChips() {
+            const container = document.getElementById('fridge-chips');
+            container.innerHTML = allIngredients.map(ing => {
+                const isSelected = selectedIngredients.includes(ing);
+                return `
+                    <button onclick="toggleIngredient('${ing}')" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1 ${isSelected ? 'bg-amber-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}">
+                        ${ing} ${isSelected ? '✓' : '+'}
+                    </button>
+                `;
+            }).join('');
+            matchRecipesFromFridge();
+        }
+
+        function toggleIngredient(ing) {
+            if (selectedIngredients.includes(ing)) {
+                selectedIngredients = selectedIngredients.filter(i => i !== ing);
+            } else {
+                selectedIngredients.push(ing);
+            }
+            renderFridgeChips();
+        }
+
+        function addCustomIngredient() {
+            const val = document.getElementById('custom-ingredient').value.trim();
+            if (val && !allIngredients.includes(val)) {
+                allIngredients.push(val);
+                selectedIngredients.push(val);
+                document.getElementById('custom-ingredient').value = '';
+                renderFridgeChips();
+            }
+        }
+
+        function matchRecipesFromFridge() {
+            const results = recipes.filter(r => r.ingredients.some(i => selectedIngredients.includes(i)));
+            const container = document.getElementById('fridge-results');
+            if (results.length === 0) {
+                container.innerHTML = `<p class="text-center col-span-2 text-gray-500 text-sm">لا توجد وصفات تطابق هذه المكونات، جرب إضافة المزيد!</p>`;
+                return;
+            }
+            container.innerHTML = results.slice(0, 6).map(r => `
+                <div class="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
+                    <h4 class="font-bold text-base mb-1">${r.name}</h4>
+                    <p class="text-xs text-gray-500 mb-3">يحتاج إلى: ${r.ingredients.join('، ')}</p>
+                    <button onclick="openCookingMode(${r.id})" class="text-xs font-bold text-amber-500 hover:underline">عرض خطوات التحضير ←</button>
+                </div>
+            `).join('');
+        }
+
+        // Grocery Logic
+        function renderGrocery() {
+            const container = document.getElementById('grocery-items');
+            const categories = [
+                { title: "🥦 خضراوات وفواكه", items: ["طماطم (1 كجم)", "بصل (1 كجم)", "فلفل أخضر (0.5 كجم)", "خيار"] },
+                { title: "🥩 لحوم وبوتينات", items: ["صدور دجاج (1 كجم)", "بيض (كرتونة)", "علبة تونة"] },
+                { title: "🧀 أجبان ومنتجات ألبان", items: ["جبنة فيتا", "حليب كوكونات"] }
+            ];
+
+            container.innerHTML = categories.map(cat => `
+                <div>
+                    <h4 class="font-bold text-sm text-gray-500 mb-3">${cat.title}</h4>
+                    <div class="space-y-2">
+                        ${cat.items.map(item => `
+                            <label class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/40 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                <input type="checkbox" class="rounded text-amber-500 focus:ring-amber-500 w-4 h-4">
+                                <span class="text-sm font-medium">${item}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent("قائمة تسوق سفرة وفكرة المجانية:\n- طماطم\n- بصل\n- صدور دجاج\n- بيض");
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        // AI Logic (Free)
+        function populateAiSelect() {
+            const select = document.getElementById('ai-recipe-select');
+            select.innerHTML = recipes.slice(0, 15).map(r => `<option value="${r.name}">${r.name}</option>`).join('');
+        }
+
+        function runAiModify() {
+            const recipeName = document.getElementById('ai-recipe-select').value;
+            const mode = document.getElementById('ai-mode').value;
+            const res = document.getElementById('ai-result');
+
+            let message = "";
+            if(mode === 'keto') {
+                message = `🤖 <strong>اقتراح الكيتو لـ (${recipeName}):</strong><br>قم باستبدال الأرز أو النشويات بشرائح الكوسة أو أرز القرنبيط، واستخدم زيت الزيتون أو الزبدة الطبيعية لزيادة الدهون الصحية وتقليل الكربوهيدرات إلى 5g فقط.`;
+            } else if(mode === 'vegan') {
+                message = `🤖 <strong>التعديل النباتي لـ (${recipeName}):</strong><br>استبدل اللحوم/الدجاج بالمشروم (المشروم الفريش) أو المشروم الأبيض مع إدراج الحمص لرفع نسبة البروتين النباتي.`;
+            } else if(mode === 'gluten-free') {
+                message = `🤖 <strong>خالي من الجلوتين لـ (${recipeName}):</strong><br>تأكد من استخدام دقيق الشوفان الخالي من الجلوتين أو دقيق اللوز بدلاً من الدقيق الأبيض العادي.`;
+            } else {
+                message = `🤖 <strong>البدائل الاقتصادية لـ (${recipeName}):</strong><br>يمكن استبدال الكريمة باللبن مع ملعقة نشا صغيرة، واستخدام قطع الدجاج المحلي بدلاً من المستورد لتوفير 40% من التكلفة.`;
+            }
+
+            res.innerHTML = message;
+            res.classList.remove('hidden');
+        }
+
+        // Cooking Mode
+        let activeTimerInterval = null;
+
+        function openCookingMode(id) {
+            const recipe = recipes.find(r => r.id === id);
+            document.getElementById('cook-recipe-title').innerText = recipe.name;
+            const stepsContainer = document.getElementById('cook-recipe-steps');
+
+            stepsContainer.innerHTML = recipe.steps.map((step, idx) => `
+                <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-2xl border border-gray-100 dark:border-gray-700">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-sm text-amber-600 dark:text-amber-400">الخطوة ${idx + 1}</span>
+                        <button onclick="startTimer(${step.timer}, 'timer-${idx}')" id="btn-timer-${idx}" class="bg-amber-500 hover:bg-amber-600 text-white text-xs px-3 py-1.5 rounded-xl font-bold flex items-center gap-1">
+                            <i data-lucide="timer" class="w-3.5 h-3.5"></i> بدء المؤقت (${step.timer} دقائق)
+                        </button>
+                    </div>
+                    <p class="text-sm font-medium leading-relaxed">${step.text}</p>
+                    <div id="timer-${idx}" class="text-xs font-bold text-amber-500 mt-2 hidden"></div>
+                </div>
+            `).join('');
+
+            document.getElementById('cooking-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function startTimer(minutes, timerId) {
+            clearInterval(activeTimerInterval);
+            let seconds = minutes * 60;
+            const display = document.getElementById(timerId);
+            display.classList.remove('hidden');
+
+            activeTimerInterval = setInterval(() => {
+                const m = Math.floor(seconds / 60);
+                const s = seconds % 60;
+                display.innerText = `⏱️ الوقت المتبقي: ${m}:${s < 10 ? '0' : ''}${s}`;
+                if (seconds <= 0) {
+                    clearInterval(activeTimerInterval);
+                    display.innerText = "🔔 انتهى الوقت المخصص لهذه الخطوة!";
+                }
+                seconds--;
+            }, 1000);
+        }
+
+        function closeCookingMode() {
+            clearInterval(activeTimerInterval);
+            document.getElementById('cooking-modal').classList.add('hidden');
+        }
+
+        // Init
+        renderPlanner();
+        renderFridgeChips();
+        renderGrocery();
+    </script>
+</body>
+</html>
